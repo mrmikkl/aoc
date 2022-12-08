@@ -1,25 +1,24 @@
-package de.dev.aoc.year2022.day1.file
+package de.dev.aoc.year2022.day1
 
 import de.dev.aoc.ResourceLoader
-import de.dev.aoc.year2022.day1.Elf
 
 
 class CaloryFileLoader {
     companion object {
         fun loadSimpleInput(): List<Elf> {
-            return this.load(CaloryFilePaths.simpleInput)
+            return load(CaloryFilePaths.simpleInput)
         }
 
         fun loadInput(): List<Elf> {
-            return this.load(CaloryFilePaths.input)
+            return load(CaloryFilePaths.input)
         }
 
         private fun load(path: String): List<Elf> {
             return ResourceLoader.load(path)
                 .trim()
                 .split("\n\n")
-                .map { it.split("\n") }
-                .map { Elf.byCaloryList(it) }
+                .map { Calories.byCaloriesString(it) }
+                .map { Elf.byCalories(it) }
         }
     }
 }

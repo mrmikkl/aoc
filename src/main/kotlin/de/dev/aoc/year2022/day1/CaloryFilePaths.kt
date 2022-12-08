@@ -1,4 +1,4 @@
-package de.dev.aoc.year2022.day1.file
+package de.dev.aoc.year2022.day1
 
 
 class CaloryFilePaths {
