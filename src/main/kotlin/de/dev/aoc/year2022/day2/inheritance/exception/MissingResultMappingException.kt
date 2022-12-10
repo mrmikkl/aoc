@@ -1,4 +1,4 @@
-package de.dev.aoc.year2022.day2.inheritance
+package de.dev.aoc.year2022.day2.inheritance.exception
 
 class MissingResultMappingException : Exception() {
 }

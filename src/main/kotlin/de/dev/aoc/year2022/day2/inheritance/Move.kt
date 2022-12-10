@@ -1,5 +1,7 @@
 package de.dev.aoc.year2022.day2.inheritance
 
+import de.dev.aoc.year2022.day2.inheritance.exception.MissingMoveMappingException
+
 private val moveTypeByEncryption: Map<String, Class<out Move>> = mapOf(
     Pair("A", Move.Rock::class.java),
     Pair("X", Move.Rock::class.java),

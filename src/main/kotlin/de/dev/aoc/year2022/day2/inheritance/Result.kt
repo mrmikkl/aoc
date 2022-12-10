@@ -1,5 +1,7 @@
 package de.dev.aoc.year2022.day2.inheritance
 
+import de.dev.aoc.year2022.day2.inheritance.exception.MissingResultMappingException
+
 
 enum class Result(val score: Int) {
     LOOSE(0),

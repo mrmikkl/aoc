@@ -33,5 +33,5 @@ fun solveDay2Part2WithInheritance() {
 }
 
 fun solveDay2SimpleInputWithEnum() {
-    TODO("Not yet implemented")
+    val strategyGuideStrings: List<String> = ResourceLoader.loadLines("/year2022/day2/simple_input.txt")
 }
