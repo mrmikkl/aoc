@@ -5,19 +5,28 @@ class StrategyGuideMove(val opponentMove: Move, val myMove: Move) {
         return myMove.determineScore(opponentMove)
     }
 
-    fun determineOpponentScore(): Int {
-        return opponentMove.determineScore(myMove)
-    }
-
     companion object {
-        fun byMovesAsString(movesAsStrings: List<String>): List<StrategyGuideMove> {
-            return movesAsStrings.map { byMovesAsString(it) }
+        fun byOpponentAndMyMovesAsString(inputs: List<String>): List<StrategyGuideMove> {
+            return inputs.map { byOpponentAndMyMovesAsString(it) }
         }
 
-        private fun byMovesAsString(movesAsString: String): StrategyGuideMove {
-            val moves: List<String> = movesAsString.split(" ")
-            val opponentMove: Move = Move.byEncryption(moves[0])
-            val myMove: Move = Move.byEncryption(moves[1])
+        private fun byOpponentAndMyMovesAsString(input: String): StrategyGuideMove {
+            val splittedInput: List<String> = input.split(" ")
+            val opponentMove: Move = MoveFactory.byEncryption(splittedInput[0])
+            val myMove: Move = MoveFactory.byEncryption(splittedInput[1])
+            return StrategyGuideMove(opponentMove, myMove)
+        }
+
+        fun byOpponentMoveAndWishedResult(inputs: List<String>): List<StrategyGuideMove> {
+            return inputs.map { byOpponentMoveAndWishedResult(it) }
+        }
+
+        private fun byOpponentMoveAndWishedResult(input: String): StrategyGuideMove {
+            val splittedInput: List<String> = input.split(" ")
+            val opponentMove: Move = MoveFactory.byEncryption(splittedInput[0])
+            val wishedResult: Result = Result.byEncryption(splittedInput[1])
+            val myMove: Move = MoveFactory.byResult(wishedResult, opponentMove)
+            println("opp: $opponentMove, res: $wishedResult, my: $myMove")
             return StrategyGuideMove(opponentMove, myMove)
         }
     }
