@@ -1,16 +1,16 @@
-package de.dev.aoc.year2022.day2
+package de.dev.aoc.year2022.day2.inheritance
 
-class StrategyGuideMove(val opponentMove: Move, val myMove: Move) {
+class StrategyGuideMove(private val opponentMove: Move, private val myMove: Move) {
     fun determineMyScore(): Int {
         return myMove.determineScore(opponentMove)
     }
 
     companion object {
-        fun byOpponentAndMyMovesAsString(inputs: List<String>): List<StrategyGuideMove> {
-            return inputs.map { byOpponentAndMyMovesAsString(it) }
+        fun byOpponentAndMyMoves(inputs: List<String>): List<StrategyGuideMove> {
+            return inputs.map { byOpponentAndMyMoves(it) }
         }
 
-        private fun byOpponentAndMyMovesAsString(input: String): StrategyGuideMove {
+        private fun byOpponentAndMyMoves(input: String): StrategyGuideMove {
             val splittedInput: List<String> = input.split(" ")
             val opponentMove: Move = MoveFactory.byEncryption(splittedInput[0])
             val myMove: Move = MoveFactory.byEncryption(splittedInput[1])
@@ -26,7 +26,6 @@ class StrategyGuideMove(val opponentMove: Move, val myMove: Move) {
             val opponentMove: Move = MoveFactory.byEncryption(splittedInput[0])
             val wishedResult: Result = Result.byEncryption(splittedInput[1])
             val myMove: Move = MoveFactory.byResult(wishedResult, opponentMove)
-            println("opp: $opponentMove, res: $wishedResult, my: $myMove")
             return StrategyGuideMove(opponentMove, myMove)
         }
     }

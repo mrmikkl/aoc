@@ -1,18 +1,18 @@
-package de.dev.aoc.year2022.day2
+package de.dev.aoc.year2022.day2.inheritance
 
 private val moveTypeByEncryption: Map<String, Class<out Move>> = mapOf(
-    Pair("A", Rock::class.java),
-    Pair("X", Rock::class.java),
-    Pair("B", Paper::class.java),
-    Pair("Y", Paper::class.java),
-    Pair("C", Scissor::class.java),
-    Pair("Z", Scissor::class.java),
+    Pair("A", Move.Rock::class.java),
+    Pair("X", Move.Rock::class.java),
+    Pair("B", Move.Paper::class.java),
+    Pair("Y", Move.Paper::class.java),
+    Pair("C", Move.Scissor::class.java),
+    Pair("Z", Move.Scissor::class.java),
 )
 
 private val winningMoveAgainstMove: Map<Class<out Move>, Class<out Move>> = mapOf(
-    Pair(Rock::class.java, Paper::class.java),
-    Pair(Paper::class.java, Scissor::class.java),
-    Pair(Scissor::class.java, Rock::class.java)
+    Pair(Move.Rock::class.java, Move.Paper::class.java),
+    Pair(Move.Paper::class.java, Move.Scissor::class.java),
+    Pair(Move.Scissor::class.java, Move.Rock::class.java)
 )
 
 class MoveFactory private constructor() {
@@ -31,9 +31,9 @@ class MoveFactory private constructor() {
 
         private fun byType(clazz: Class<out Move>?): Move {
             return when (clazz) {
-                Rock::class.java -> Rock()
-                Paper::class.java -> Paper()
-                Scissor::class.java -> Scissor()
+                Move.Rock::class.java -> Move.Rock()
+                Move.Paper::class.java -> Move.Paper()
+                Move.Scissor::class.java -> Move.Scissor()
                 else -> {
                     throw MissingMoveMappingException()
                 }
@@ -44,7 +44,7 @@ class MoveFactory private constructor() {
 
 // `Class<out Move>` is called Declaration-site variance
 // means you can only use reading methods of Move
-abstract class Move(private val encryption: List<String>, private val score: Int) {
+abstract class Move protected constructor(private val score: Int) {
     fun determineScore(otherMove: Move): Int {
         return score +
                 if (this.javaClass == otherMove.javaClass)
@@ -56,15 +56,17 @@ abstract class Move(private val encryption: List<String>, private val score: Int
     }
 
     override fun toString(): String {
-        return "MOVE(${this::class.java.simpleName}, E:$encryption, S:$score)"
+        return "MOVE(${this::class.java.simpleName}, S:$score)"
+    }
+
+    internal class Rock() : Move(1) {
+    }
+
+    internal class Paper() : Move(2) {
+    }
+
+    internal class Scissor() : Move(3) {
     }
 }
 
-class Rock() : Move(listOf("A", "X"), 1) {
-}
 
-class Paper() : Move(listOf("B", "Y"), 2) {
-}
-
-class Scissor() : Move(listOf("C", "Z"), 3) {
-}

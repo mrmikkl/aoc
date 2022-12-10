@@ -1,4 +1,4 @@
-package de.dev.aoc.year2022.day2
+package de.dev.aoc.year2022.day2.inheritance
 
 
 enum class Result(val score: Int) {
