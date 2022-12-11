@@ -49,12 +49,11 @@ class MoveFactory private constructor() {
 abstract class Move protected constructor(private val score: Int) {
     fun determineScore(otherMove: Move): Int {
         return score +
-                if (this.javaClass == otherMove.javaClass)
-                    Result.DRAW.score
-                else if (this.javaClass == winningMoveAgainstMove[otherMove.javaClass])
-                    Result.WIN.score
-                else
-                    Result.LOOSE.score
+                when (this.javaClass) {
+                    otherMove.javaClass -> Result.DRAW.score
+                    winningMoveAgainstMove[otherMove.javaClass] -> Result.WIN.score
+                    else -> Result.LOOSE.score
+                }
     }
 
     override fun toString(): String {
