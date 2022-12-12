@@ -26,7 +26,7 @@ fun solveDay1Part1() {
 }
 
 fun solveDay1Part2() {
-    val rucksackGroupsAsStringLists: List<List<String>> = ResourceLoader.loadLines("/year2022/day3/input.txt").chunked(3) s
+    val rucksackGroupsAsStringLists: List<List<String>> = ResourceLoader.loadLines("/year2022/day3/input.txt").chunked(3)
     val rucksackGroups: List<RucksackGroup> = rucksackGroupsAsStringLists.map { RucksackGroup.byInputStrings(it) }
     val priorities: List<Priority> = rucksackGroups.map { it.prioritize() }
     val sumedPriorites: Int = priorities.sumOf { it.value }
